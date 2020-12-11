@@ -1,0 +1,11 @@
+{
+  "name": "casus",
+  "version": "1.0.0",
+  "description": "Casus voor JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vijfhart-IT",
+  "license": "ISC"
+}

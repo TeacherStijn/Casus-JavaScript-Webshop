@@ -1,0 +1,36 @@
+body {
+    padding: 2em;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+main section {
+    width: 80vw;
+}
+
+aside {
+    width: 20vw;
+}
+
+img.wwimage {
+    width: 50px;
+    height: 50px;
+}
+
+button span {
+    pointer-events: none;
+}
+
+.card-img-top {
+    width: 380px;
+    height: 120px;
+}
+
+footer {
+    background-color: red;
+    color: white;
+}

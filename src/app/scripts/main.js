@@ -3,7 +3,12 @@ import { bestelModule } from './bestelling.js';
 
 function setup()
 {
-    // eerst array maken
+    /* Het MAIN element bevat een met JavaScript gegenereerde verzameling aan producten
+   die besteld kunnen worden, met achter de schermen een voorraad die
+   aangepast kan worden door te bestellen. Maak deze productlijst middels een Map()
+   met het product en de bijbehorende voorraad. */
+
+    // eerst array maken om zo Map mee te vullen
     let tempLijst = [
         new Artikel('Lego Batmobile', 215),
         new Artikel('Doppler waterfles', 10),
@@ -13,7 +18,7 @@ function setup()
 
     const productLijst = new Map();
 
-    // map van de array maken en deze mergen met random voorraad
+    // map van de array maken en deze mergen met random VOORRAAD
     tempLijst.forEach(
         (key) => {
             let rng = Math.ceil(Math.random()*10);
@@ -27,47 +32,35 @@ function setup()
     // Initialiseer bestelling module:
     const bestelling = bestelModule(productLijst);
 
-    // forEach beschikbaar maken op NodeList's zoals een HTMLCollection,
-    NodeList.prototype.forEach = function(e) {
+    // BONUSPUNTEN:
+    // Alternatief voor: Array.from(verzameling);
+    // forEach beschikbaar maken op HTMLCollection;
+    // niet nodig op bijv NodeList (met querySelectorAll)
+    HTMLCollection.prototype.forEach = function(e) {
         // This is hier de NodeList in betrekking
         Array.prototype.forEach.call(this, e);
     }
 
+    // Functie voor het tonen van de winkel producten op de hoofdpagina
+    //
     function toonProducten() {
         productLijst.forEach(
-            (e,i,reeks) => { orderRij(i) }
+            (e,i,reeks) => { productRij(i) }
         );
 
-        function orderRij(item) {
-/*            const tabel = document.querySelector("#productOverzicht");
-            const rij = document.createElement("tr");
-            const celProduct = document.createElement("td");
-            const celAantal = document.createElement("td");
-            const product = document.createElement("span");
-            const productText = document.createTextNode(item.naam);
-            const aantal = document.createElement("input");
-            aantal.setAttribute("type", "number");
-            aantal.setAttribute("min", 0);
-            // bewust geen max instelling om voorraad dus te kunnen overschrijven ;)
-            //aantal.setAttribute("max", ??)
-
-            product.appendChild(productText);
-            celProduct.appendChild(product);
-            celAantal.appendChild(aantal);
-            rij.appendChild(celProduct);
-            rij.appendChild(celAantal);
-            tabel.appendChild(rij);*/
-
+        function productRij(item) {
             // Bootstrap CSS way:
-            const form = document.querySelector("#formBestelling");
+            const form = document.querySelector('#formBestelling');
             form.innerHTML += `
                 <div class="card" style="width:400px">
+                  <!-- Zoek per product ook een toepasselijke afbeelding op. Toon deze netjes op het scherm middels bijvoorbeeld cards van de Bootstrap library. -->
                   <img class="card-img-top" src="./images/${ item.image }.webp" alt="Card image">
                   <div class="card-body">
                     <h4 class="card-title">${ item.naam }</h4>
                     <p class="card-text">
                         ${ item.prijs }
                         <br/>
+                        <!-- Ieder product moet bestelbaar zijn, dus krijgt ook een Knop om het huidige product toe te voegen OF een dubbelklik even handler. -->
                         <button class="btn btn-primary" id="${item.naam}">
                             <span class="material-icons">add_shopping_cart</span>
                         </button>
@@ -77,50 +70,49 @@ function setup()
             `
         }
 
-        document.querySelectorAll("#formBestelling button").forEach(
+        // Event listeners aan button PER product toevoegen:
+        document.querySelectorAll('#formBestelling button').forEach(
             (btn) => {
                 btn.addEventListener('click', (ev) => {
                     ev.preventDefault();
 
                     // bestel m.b.v. bestelling module
-                    const naam = ev.target.getAttribute("id");
+                    const naam = ev.target.getAttribute('id');
                     let result;
                     productLijst.forEach(
-                        (e,i) => {
-                            if (i.naam == naam) {
-                                result = i;
+                        (i, el) => {
+                            if (el.naam == naam) {
+                                result = el;
                             }
                         }
                     );
 
-                    try {
-                        bestelling.add(result);
-                    } catch (err) {
-                        document.querySelector("footer").innerHTML = err;
-                    }
-
-                    document.querySelector("footer").innerHTML = "";
-                })
+                    // Na klik op knop per product, item toevoegen aan winkelwagen middels bestelling module
+                    bestelling.add(result);
+                });
             }
         );
 
-        document.querySelector("#saveCart").addEventListener('click', (ev)=>{
-            try {
-                ev.preventDefault();
-                bestelling.save();
-            } catch (err) {
-                document.querySelector("footer").innerHTML = err;
-            }
-
-            document.querySelector("footer").innerHTML = "";
-            alert("Bestelling opgeslagen voor later");
-        })
+        document.querySelector('#saveCart').addEventListener('click', (ev)=>{
+            ev.preventDefault();
+            bestelling.save();
+            alert('Bestelling opgeslagen voor later');
+        });
     }
 
     toonProducten();
 }
 
 // ophalen bestaande bestelling check met localStorage nog doen.
+try {
+    setup();
+    throw new Error('Mooie test melding');
+}
+catch(err){
+    const foutLog = localStorage.getItem('foutlog');
+    const fout = new Date() + '@' + err + '\n';
+    const foutTekst = foutLog==undefined?fout:foutLog+fout;
+    localStorage.setItem('foutlog', foutTekst);
 
-setup();
-
+    // if datum = laatste v/d maand? schrijf naar back-end ;)
+}

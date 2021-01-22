@@ -21,6 +21,10 @@ img.wwimage {
     height: 50px;
 }
 
+.eindRij {
+    font-weight: 600;
+}
+
 button span {
     pointer-events: none;
 }

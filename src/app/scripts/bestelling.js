@@ -44,6 +44,8 @@ export const bestelModule =
             if (data[index].aantal > 1){
                 data[index].aantal--;
             } else {
+                console.log('Geen meer; haal maar uit de array');
+                data[index].aantal = 0;
                 data.splice(index,1);
             }
 

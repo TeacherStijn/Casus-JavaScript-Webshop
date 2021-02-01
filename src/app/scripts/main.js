@@ -104,9 +104,13 @@ function setup()
 }
 
 // ophalen bestaande bestelling check met localStorage nog doen.
+
+// Evt foutafhandeling met custom event doen:
+// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+
+// Nu stopt hij al te vroeg
 try {
     setup();
-    throw new Error('Mooie test melding');
 }
 catch(err){
     const foutLog = localStorage.getItem('foutlog');

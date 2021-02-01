@@ -20,10 +20,10 @@ function setup()
 
     // map van de array maken en deze mergen met random VOORRAAD
     tempLijst.forEach(
-        (key) => {
+        (elem) => {
             let rng = Math.ceil(Math.random()*10);
             console.log(`Random nummer: ${rng}`);
-            productLijst.set(key, rng)
+            productLijst.set(elem, rng)
         }
     );
 

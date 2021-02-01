@@ -9,13 +9,12 @@
 export const bestelModule =
   function(productLijst){
      let data = [];
-
+    
      return {
         add: function(artikel) {
             // Voorraadcheck; kijk in de Map bij het bijbehorende artikel (key) wat de waarde (voorraad) is:
             const voorraad = productLijst.get(artikel);
             if (voorraad > 0) {
-
                 // Als artikel nog niet in winkelwagen zit, dan toevoegen
                 if (data.indexOf(artikel) == -1) {
                     artikel.aantal = 1;
@@ -38,8 +37,8 @@ export const bestelModule =
         },
 
         remove: function(index) {
-
-            const voorraad = productLijst.get(artikel);
+            const product = data[index];
+            const voorraad = productLijst.get(product);
 
             console.log('Index: ' + index);
             if (data[index].aantal > 1){
@@ -49,7 +48,7 @@ export const bestelModule =
             }
 
             // Voorraad aanpassen:
-            productLijst.set(artikel, voorraad+1);
+            productLijst.set(product, voorraad+1);
             console.log('Huidige voorraad nu: ' + voorraad);
             this.toRows();
         },

@@ -9,6 +9,8 @@ Maak een eenvoudige HTML5, CSS en JavaScript webwinkel met:
 - Artikel heeft ook een functie totaal(): die geeft de prijs * aantal terug.
 - De HTML pagina dient een BODY met daarin HEADER, MAIN en FOOTER te bevatten. 
 - Het MAIN element bevat een met JavaScript gegenereerde verzameling aan producten die besteld kunnen worden, met achter de schermen een voorraad die aangepast kan worden door te bestellen. Maak deze productlijst middels een Map() met het product en de bijbehorende voorraad.
+  Het Map object: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map 
+
 - Zoek per product ook een toepasselijke afbeelding op. Toon deze netjes op het scherm middels bijvoorbeeld cards van de Bootstrap library.
 - Ieder product moet bestelbaar zijn, dus krijgt ook een Knop om het huidige product toe te voegen OF een dubbelklik even handler. 
 - Als een gebruiker een artikel selecteert, wordt deze toegevoegd aan het "boodschappenmandje": een rij van een tabel, waarin naam, aantal, prijs en prijs * aantal vermeld staan. Pas ook direct voor dit voorbeeld de voorraad aan. Zet deze ‘winkelwagen’ onderaan of aan de rechterzijde van je pagina.

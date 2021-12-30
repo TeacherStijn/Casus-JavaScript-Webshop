@@ -1,0 +1,95 @@
+@media sreen and (max-width: 500px) {
+
+}
+
+@media screen and (max-width: 2000px) {
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 90vw;
+        min-width: 550px;
+        background-color: #bed3c3;
+        margin: 0 auto;
+    }
+
+    body > header, body > footer {
+        height: 15vh;
+        background-color: #212e53;
+        color: white;
+    }
+
+    body > footer {
+        width: 100%;
+        height: 15vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    }
+
+    body > footer > section {
+        width: 30vw;
+    }
+
+    main {
+        padding: 1em;
+        background-color: #4a919e;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        width: 85vw;
+    }
+
+    main > section {
+        width: 90%;
+    }
+
+    .menu ul li {
+        display: inline;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    #cards {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 70vw;
+    }
+
+    #cards .card {
+        width: 300px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    @font-face {
+        font-family: 'Lotr';
+        src: url("../fonts/lotr.ttf");
+    }
+
+    #mainForm {
+        width: 90%;
+    }
+
+    #mainForm label {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+    }
+
+    #mainForm label > span {
+        width: 50%;
+    }
+}

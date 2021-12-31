@@ -78,7 +78,12 @@ window.addEventListener('load', function () {
 
         fetch('https://api.spacexdata.com/v2/launches/').then(
             inp=>inp.json()
-        ).then(data=>vluchtBeheer.init(data));
+        ).then(
+            function(data){
+                vluchtBeheer.init(data);
+                vluchtBeheer.export();
+            }
+        );
 
         const vluchtBeheer = (function() {
             let data = [];
@@ -97,32 +102,25 @@ window.addEventListener('load', function () {
                         document.body.innerHTML += `<li>${vlucht.mission_name} (${vlucht.launch_year})</li>`;
                     }
                     document.body.innerHTML += '</ul>';
+                },
+                export: function() {
+                    window.localStorage.setItem('vluchten', JSON.stringify(data));
                 }
             }
         })();
 
+    /*
+        // Filteren properties die binnen komen?
 
+    fetch('https://api.spacexdata.com/v2/launches/').then(
+        inp=>inp.json()
+    ).then(data=>{
 
+        let resultaat = data.map(el=>{ return { naam: el.mission_name, jaar: el.launch_year }});
+        console.dir(resultaat);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    });
+*/
     }
 );
 

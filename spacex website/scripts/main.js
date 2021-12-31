@@ -82,6 +82,7 @@ window.addEventListener('load', function () {
             function(data){
                 vluchtBeheer.init(data);
                 vluchtBeheer.export();
+                console.log(vluchtBeheer.zoekVlucht('FalconSat').flight_number);
             }
         );
 
@@ -97,11 +98,30 @@ window.addEventListener('load', function () {
                     data.push(v)
                 },
                 toon: function() {
-                    document.body.innerHTML += '<ul>';
+
+                    let doel = document.getElementById('cards');
+
+                    doel.innerHTML += '<ul>';
                     for (let vlucht of data) {
-                        document.body.innerHTML += `<li>${vlucht.mission_name} (${vlucht.launch_year})</li>`;
+                        doel.innerHTML += `
+                          <div class="card">
+                                <img class="card-img-top" src="${vlucht.links.mission_patch}" alt="Card image" height="70px">
+                                <div class="card-body">
+                                    <h4 class="card-title">${vlucht.mission_name}</h4>
+                                    <p class="card-text">${vlucht.details}</p>
+                                    <a href="${vlucht.links.video_link}" target="_blank" class="btn btn-primary">Youtube</a>
+                                </div>
+                            </div>                     
+                        `;
                     }
-                    document.body.innerHTML += '</ul>';
+                    doel.innerHTML += '</ul>';
+                },
+                zoekVlucht: function(naam){
+                    return data.find(
+                                function(el){
+                                    return el.mission_name == naam
+                                }
+                            )
                 },
                 export: function() {
                     window.localStorage.setItem('vluchten', JSON.stringify(data));

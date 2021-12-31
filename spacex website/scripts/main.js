@@ -141,6 +141,26 @@ window.addEventListener('load', function () {
 
     });
 */
+
+    let knop = document.getElementById('btnVerwerk');
+
+    knop.addEventListener('click', function(ev){
+        console.log('klik!');
+        console.dir(ev);
+    });
+
+    let veld = document.getElementById('txtUsername');
+
+    veld.addEventListener('keypress', function(ev){
+        if (ev.target.value=='JS sucks') {
+            ev.target.classList.add('fout');
+        }
+
+        console.dir(ev);
+        // ev.target.value='Pim wilt je dwarszitten';
+    });
+
+
     }
 );
 

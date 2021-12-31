@@ -92,4 +92,8 @@
     #mainForm label > span {
         width: 50%;
     }
+
+    .fout {
+        border: solid 1px red;
+    }
 }
